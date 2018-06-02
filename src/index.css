@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.places {
+  margin: 20px;
+}
+
+.high {
+  background: yellow;
+}
