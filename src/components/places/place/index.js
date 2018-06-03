@@ -1,16 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Place from './place';
 
 class Consumer extends React.Component {
-
+  static contextTypes = {
+    highlight: PropTypes.func,
+    highlights: PropTypes.array,    
+  }
   render() {
-    debugger;
-    //const { highlight } = this.context;
-    const { highlights } = this.props
+    const { highlight, highlights } = this.context;
     return (
       <Place
+        highlight={highlight}
         highlights={highlights}
         {...this.props}
       />
@@ -18,4 +19,4 @@ class Consumer extends React.Component {
   }
 }
 
-export default connect(({ highlights }) => ({ highlights }))(Consumer);
+export default Consumer;

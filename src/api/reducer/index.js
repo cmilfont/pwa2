@@ -1,22 +1,16 @@
+import { fromJS } from 'immutable';
+
 const initialState = {
   list: [],
   highlights: []
 };
 
-export default (state = initialState, action) => {
+export default (state = fromJS(initialState), action) => {
   switch (action.type) {
     case 'SELECT_TEXT':
-      const { highlights } = state;
-      highlights.push(action.payload);
-      return {
-        ...state,
-        highlights,
-      }
+      return state.update('highlights', highlights => highlights.push(action.payload))
     case 'FETCH_PLACES':
-      return {
-        ...state,
-        list: action.payload,
-      }
+      return state.set('list', fromJS(action.payload))
       break;
   
     default:

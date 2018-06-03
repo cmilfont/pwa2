@@ -4,7 +4,7 @@ import Places from './places';
 
 const mapStateToProps = (state) => {
   return {
-    list: state.list,
+    list: state.get('list').toJS(),
   }
 }
 

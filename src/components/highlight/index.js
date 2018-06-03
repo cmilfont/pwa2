@@ -6,11 +6,13 @@ class Highlight extends React.Component {
 
   static childContextTypes = {
     highlight: PropTypes.func,
+    highlights: PropTypes.array,
   }
 
   getChildContext() {
     return {
       highlight: this.highlight,
+      highlights: this.props.highlights,
     }
   }
 
@@ -29,7 +31,11 @@ class Highlight extends React.Component {
 }
 
 export default connect(
-  null,
+  state => {
+    return ({
+      highlights: state.get('highlights').toJS()
+    })
+  },
   dispatch => ({
     addHighlight: payload => dispatch({
       type: 'SELECT_TEXT',
