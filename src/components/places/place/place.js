@@ -11,7 +11,7 @@ const Place = ({
 
   const highlightedContent = highlights.reduce((resultado, text) => {
     return resultado.replace(text, `<span class="high">${text}</span>`);
-  }, content) 
+  }, content);
 
   return (
   <li>

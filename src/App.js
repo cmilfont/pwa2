@@ -2,36 +2,48 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Theme from './components/theme';
 import Highlight from './components/highlight';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from './api/reducer';
+import sagas from './api/sagas';
+
+const sagaMiddleware = createSagaMiddleware({});
+const history = createHistory();
+const middlewares = [
+  routerMiddleware(history),
+  sagaMiddleware
+];
+
+const enhancedCompose = composeWithDevTools({});
+const composedMiddlewares = enhancedCompose(
+  applyMiddleware(...middlewares)
+);
+
+const store = createStore(reducer, composedMiddlewares);
+
+sagaMiddleware.run(sagas);
 
 class App extends Component {
 
-  componentDidMount() {
-    fetch('/api/places')
-    .then(result => result.json())
-    .then(list => this.store.dispatch({
-      type: 'FETCH_PLACES',
-      payload: list,
-    }));
-  }
-
   render() {
-  
-    this.store = createStore(reducer);
 
     return (
-      <Provider store={this.store}>
-        <Highlight>
-          <div className="App">
-            <Theme>
-              <p className="App-intro">
-                Curso de PWA
-              </p>
-            </Theme>
-          </div>
-        </Highlight>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Highlight>
+            <div className="App">
+              <Theme>
+                <p className="App-intro">
+                  Curso de PWA
+                </p>
+              </Theme>
+            </div>
+          </Highlight>
+        </ConnectedRouter>
       </Provider>
     );
   }
