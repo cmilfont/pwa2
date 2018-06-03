@@ -1,9 +1,9 @@
 import { all, fork } from 'redux-saga/effects';
-import watchFetchPlaces from './fetch-places';
+import watchFetchEntities from './fetch-entities';
 
 function* sagas() {
   yield all([
-    fork(watchFetchPlaces),
+    fork(watchFetchEntities),
   ]);
 }
 

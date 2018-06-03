@@ -36,11 +36,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <Highlight>
             <div className="App">
-              <Theme>
-                <p className="App-intro">
-                  Curso de PWA
-                </p>
-              </Theme>
+              <Theme />
             </div>
           </Highlight>
         </ConnectedRouter>

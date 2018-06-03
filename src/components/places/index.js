@@ -1,17 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Places from './places';
-import { FETCH_PLACES } from '../../api/constants';
+import {fromJS} from 'immutable';
+import { FETCH_ENTITY } from '../../api/constants';
 
 const mapStateToProps = (state) => {
   return {
-    list: state.get('list').toJS(),
+    list: state.getIn(['entities', 'places'], fromJS([])).toJS(),
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchPlaces: () => dispatch({
-    type: FETCH_PLACES
-  })
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Places);
+export default connect(mapStateToProps)(Places);

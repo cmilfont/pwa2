@@ -11,6 +11,7 @@ export default [
   {
     path: '/places',
     component: Places,
+    exact: true,
   },
   {
     path: '/places/:placeSlug?',

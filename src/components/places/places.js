@@ -3,12 +3,6 @@ import Place from './place/index.js';
 
 class Places extends React.Component {
 
-  componentDidMount() {
-    if (this.props.fetchPlaces) {
-      this.props.fetchPlaces();
-    }
-  }
-
   render() {
     const { list } = this.props;
     const places = list.map(item => 

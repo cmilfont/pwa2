@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Place = ({
   highlights,
   content,
   name,
+  slug,
   cover: { file: { url } },
   destination: { name: destinationName }
 }) => {
@@ -17,7 +19,11 @@ const Place = ({
   <li>
     <div>
       <img src={url} />
-      <div className="name">{name}</div>
+      <div className="name">
+        <Link to={`/places/${slug}`}>
+          {name}
+        </Link>
+      </div>
       <div>{destinationName}</div>
       <div
         dangerouslySetInnerHTML={{ __html: highlightedContent }}

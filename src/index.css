@@ -4,6 +4,11 @@ body {
   font-family: sans-serif;
 }
 
+.leaflet-container {
+  min-height: 300px;
+  width: 100%;
+}
+
 .places {
   margin: 20px;
 }

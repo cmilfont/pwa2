@@ -1,13 +1,22 @@
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { FETCH_PLACES_SUCCESS } from '../constants';
+import { FETCH_ENTITY_SUCCESS } from '../constants';
+import fetchEntities from '../domain/fetch-entities';
 
 const initialState = {
   router: {
     locationBeforeTransitions: null,
   },
-  list: [],
-  highlights: []
+  entities: {},
+  highlights: [],
+  map: {
+    center: [
+      -22.7191048,
+      -45.56639799999999,
+    ],
+    zoom: 10,
+    bounds: []
+  },
 };
 
 export default (state = fromJS(initialState), action) => {
@@ -17,8 +26,8 @@ export default (state = fromJS(initialState), action) => {
       break;
     case 'SELECT_TEXT':
       return state.update('highlights', highlights => highlights.push(action.payload))
-    case FETCH_PLACES_SUCCESS:
-      return state.set('list', fromJS(action.payload))
+    case FETCH_ENTITY_SUCCESS:
+      return fetchEntities(state, action);
       break;
   
     default:
